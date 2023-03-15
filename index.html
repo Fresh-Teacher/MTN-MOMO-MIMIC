@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MTN MOMO</title>
+	<script>
+		function checkBalance() {
+			var balance = 10000;
+			var pin = prompt("Enter your 5-digit pin or 0 to go back:");
+			if (pin == null) {
+				return;
+			}
+			if (pin == 0) {
+				showMenu();
+				return;
+			}
+			if (pin != 12345) {
+				alert("Invalid pin! Please try again.");
+				checkBalance();
+				return;
+			}
+			alert("Your balance is: " + balance);
+			var response = prompt("Press * to go back to the main menu:");
+			if (response == null) {
+				return;
+			}
+			if (response == "*") {
+				showMenu();
+				return;
+			}
+			alert("Invalid response! Please try again.");
+			checkBalance();
+		}
+	function deposit() {
+		var balance = 10000;
+		var amount = prompt("Enter amount to deposit or 0 to go back:");
+		if (amount == null) {
+			return;
+		}
+		if (amount == 0) {
+			showMenu();
+			return;
+		}
+		if (isNaN(amount) || amount < 0) {
+			alert("Invalid amount! Please try again.");
+			deposit();
+			return;
+		}
+		var pin = prompt("Enter your 5-digit pin or 0 to go back:");
+		if (pin == null) {
+			return;
+		}
+		if (pin == 0) {
+			showMenu();
+			return;
+		}
+		if (pin != 12345) {
+			alert("Invalid pin! Please try again.");
+			deposit();
+			return;
+		}
+		balance += parseInt(amount);
+		alert("You have deposited " + amount + " and your new balance is: " + balance);
+		var response = prompt("Press * to go back to the main menu:");
+		if (response == null) {
+			return;
+		}
+		if (response == "*") {
+			showMenu();
+			return;
+		}
+		alert("Invalid response! Please try again.");
+		deposit();
+	}
+
+	function withdraw() {
+		var balance = 10000;
+		var amount = prompt("Enter amount to withdraw or 0 to go back:");
+		if (amount == null) {
+			return;
+		}
+		if (amount == 0) {
+			showMenu();
+			return;
+		}
+		if (isNaN(amount) || amount < 0) {
+			alert("Invalid amount! Please try again.");
+			withdraw();
+			return;
+		}
+		var pin = prompt("Enter your 5-digit pin or 0 to go back:");
+		if (pin == null) {
+			return;
+		}
+		if (pin == 0) {
+			showMenu();
+			return;
+		}
+		if (pin != 12345) {
+			alert("Invalid pin! Please try again.");
+			withdraw();
+			return;
+		}
+		if (amount > balance) {
+			alert("Insufficient balance! Your current balance is: " + balance);
+			var newAmount = prompt("Enter an amount below " + balance + " or 0 to go back:");
+			if (newAmount == null) {
+				return;
+			}
+			if (newAmount == 0) {
+				showMenu();
+				return;
+			}
+			if (isNaN(newAmount) || newAmount < 0 || newAmount > balance) {
+				alert("Invalid amount! Please try again.");
+withdraw();
+return;
+}
+amount = newAmount;
+}
+balance -= parseInt(amount);
+alert("You have withdrawn " + amount + " and your new balance is: " + balance);
+var response = prompt("Press * to go back to the main menu:");
+if (response == null) {
+return;
+}
+if (response == "*") {
+showMenu();
+return;
+}
+alert("Invalid response! Please try again.");
+withdraw();
+}
+function sendMoney() {
+	var balance = 10000;
+	var recipientNumber = prompt("Enter recipient's MTN number:");
+	if (recipientNumber == null) {
+		return;
+	}
+	if (!/^(078|077|076)\d{7}$/.test(recipientNumber)) {
+		alert("Invalid MTN number! Please try again.");
+		sendMoney();
+		return;
+	}
+	var amount = prompt("Enter amount to send or 0 to go back:");
+	if (amount == null) {
+		return;
+	}
+	if (amount == 0) {
+		showMenu();
+		return;
+	}
+	if (isNaN(amount) || amount < 0) {
+		alert("Invalid amount! Please try again.");
+		sendMoney();
+		return;
+	}
+	var pin = prompt("Enter your 5-digit pin or 0 to go back:");
+	if (pin == null) {
+		return;
+	}
+	if (pin == 0) {
+		showMenu();
+		return;
+	}
+	if (pin != 12345) {
+		alert("Invalid pin! Please try again.");
+		sendMoney();
+		return;
+	}
+	if (amount > balance) {
+		alert("Insufficient balance! Your current balance is: " + balance);
+		var newAmount = prompt("Enter an amount below " + balance + " or 0 to go back:");
+		if (newAmount == null) {
+			return;
+		}
+		if (newAmount == 0) {
+			showMenu();
+			return;
+		}
+		if (isNaN(newAmount) || newAmount < 0 || newAmount > balance) {
+			alert("Invalid amount! Please try again.");
+			sendMoney();
+			return;
+		}
+		amount = newAmount;
+	}
+	balance -= parseInt(amount);
+	alert("You have sent " + amount + " to " + recipientNumber + " and your new balance is: " + balance);
+	var response = prompt("Press * to go back to the main menu:");
+	if (response == null) {
+		return;
+	}
+	if (response == "*") {
+		showMenu();
+		return;
+	}
+	alert("Invalid response! Please try again.");
+	sendMoney();
+}
+
+function showMenu() {
+	var choice = prompt("Welcome to MTN MoMo:\n1. Check balance\n2. Deposit\n3. Withdraw\n4. Send money\n5. Quit");
+	if (choice == null) {
+		return;
+	}
+	switch (choice) {
+		case "1":
+			checkBalance();
+			break;
+		case "2":
+			deposit();
+			break;
+		case "3":
+			withdraw();
+			break;
+		case "4":
+			sendMoney();
+			break;
+		case "5":
+			alert("Goodbye!");
+			break;
+		default:
+			alert("Invalid choice! Please try again.");
+			showMenu();
+			break;
+	}
+}
+</script>
+</head>
+<body onload="showMenu();">
+</body>
+</html>
