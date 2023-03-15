@@ -3,6 +3,183 @@
 <html>
 <head>
 	<title>MTN MOMO</title>
+    <body>
+    <h1>This system runs on the following C code:</h1>
+    <pre>
+#include &lt;stdio.h&gt;
+int main() {
+int balance = 10000;
+int option, amount, pin;
+long long phoneNumber;
+printf("Yello! Welcome to MTN MOMO\n");
+while (1) {
+    printf("\nSelect an option:\n");
+    printf("1. Check balance\n");
+    printf("2. Deposit\n");
+    printf("3. Withdraw\n");
+    printf("4. Send money\n");
+    printf("5. Quit\n");
+    printf("Enter your option: ");
+    if (scanf("%d", &option) != 1) {
+        // Stop endless loop for invalid options
+        while(getchar() != '\n');
+        printf("Invalid option! Please try again.\n");
+        continue;
+    }
+
+    switch (option) {
+        case 1:
+            // Ask for pin when checking balance
+            printf("Enter your 5-digit pin or 0 to go back: ");
+            scanf("%d", &pin);
+            if (pin == 0) {
+                break;
+            }
+            if (pin != 12345) {
+                printf("Invalid pin!\n");
+                break;
+            }
+            printf("Your balance is: %d\n", balance);
+            printf("Press * to go back to the main menu\n");
+            getchar();
+            if (getchar() == '*') {
+                break;
+            }
+            else {
+                printf("Invalid response!\n");
+                break;
+            }
+            break;
+
+        case 2:
+            printf("Enter amount to deposit or 0 to go back: ");
+            scanf("%d", &amount);
+            if (amount == 0) {
+                break;
+            }
+            if (amount < 0) {
+                printf("Invalid amount!\n");
+                break;
+            }
+            // Ask for pin when depositing
+            printf("Enter your 5-digit pin or 0 to go back: ");
+            scanf("%d", &pin);
+            if (pin == 0) {
+                break;
+            }
+            if (pin != 12345) {
+                printf("Invalid pin!\n");
+                break;
+            }
+            balance += amount;
+            printf("You have deposited %d and your new balance is: %d\n", amount, balance);
+            printf("Press * to go back to the main menu\n");
+            getchar();
+            if (getchar() == '*') {
+                break;
+            }
+            else {
+                printf("Invalid response!\n");
+                break;
+            }
+            break;
+
+        case 3:
+            printf("Enter amount to withdraw or 0 to go back: ");
+            scanf("%d", &amount);
+            if (amount == 0) {
+                break;
+            }
+            if (amount < 0) {
+                printf("Invalid amount!\n");
+                break;
+            }
+            // Ask for pin when withdrawing
+            printf("Enter your 5-digit pin or 0 to go back: ");
+            scanf("%d", &pin);
+            if (pin == 0) {
+                break;
+            }
+            if (pin != 12345) {
+                printf("Invalid pin!\n");
+                break;
+            }
+            if (amount > balance) {
+                printf("Insufficient balance! Your current balance is: %d\n", balance);
+                printf("Enter an amount below %d or 0 to go back:", balance);
+                break;
+            }
+            balance -= amount;
+            printf("You have withdrawn %d and your new balance is: %d\n", amount, balance);
+printf("Press * to go back to the main menu\n");
+getchar();
+if (getchar() == '*') {
+break;
+}
+else {
+printf("Invalid response!\n");
+break;
+}
+break;
+    case 4:
+        printf("Enter phone number to send money to: ");
+        scanf("%lld", &phoneNumber);
+        if (phoneNumber < 1000000000 || phoneNumber > 9999999999) {
+            printf("Invalid phone number!\n");
+            break;
+        }
+        printf("Enter amount to send or 0 to go back: ");
+        scanf("%d", &amount);
+        if (amount == 0) {
+            break;
+        }
+        if (amount < 0) {
+            printf("Invalid amount!\n");
+            break;
+        }
+        // Ask for pin when sending money
+        printf("Enter your 5-digit pin or 0 to go back: ");
+        scanf("%d", &pin);
+        if (pin == 0) {
+            break;
+        }
+        if (pin != 12345) {
+            printf("Invalid pin!\n");
+            break;
+        }
+        if (amount > balance) {
+            printf("Insufficient balance! Your current balance is: %d\n", balance);
+            printf("Enter an amount below %d or 0 to go back:", balance);
+            break;
+        }
+        balance -= amount;
+        printf("You have sent %d to %lld and your new balance is: %d\n", amount, phoneNumber, balance);
+        printf("Press * to go back to the main menu\n");
+        getchar();
+        if (getchar() == '*') {
+            break;
+        }
+        else {
+            printf("Invalid response!\n");
+            break;
+        }
+        break;
+
+    case 5:
+        printf("Thank you for using MTN MOMO! Goodbye.\n");
+        return 0;
+
+    default:
+        printf("Invalid option! Please try again.\n");
+        break;
+}
+}
+return 0;
+}
+</pre>
+
+  </body>
+</html> 
 	<script>
 		function checkBalance() {
 			var balance = 10000;
@@ -200,7 +377,7 @@ function sendMoney() {
 }
 
 function showMenu() {
-	var choice = prompt("Welcome to MTN MoMo:\n1. Check balance\n2. Deposit\n3. Withdraw\n4. Send money\n5. Quit");
+	var choice = prompt("Yello! Welcome to MTN MoMo:\n1. Check balance\n2. Deposit\n3. Withdraw\n4. Send money\n5. Quit");
 	if (choice == null) {
 		return;
 	}
